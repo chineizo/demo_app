@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY hello "Hello">]>
+<resources>
+    <string name="app_name">DemoApp</string>
+    <string name="hello_world">&hello; World!</string>
+    <string name="span_this_string">&hello;</string>
+    <string name="cancel_location_update">Cancel Location Update</string>
+    <string name="permission_denied">Permission Denied!</string>
+</resources>
