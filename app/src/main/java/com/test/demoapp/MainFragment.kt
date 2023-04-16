@@ -18,13 +18,6 @@ import androidx.fragment.app.Fragment
 
 class MainFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (requireContext().hasLocationPermission()) {
-            launchBootCompleteService(requireContext())
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,12 +34,6 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun launchBootCompleteService(context: Context) {
-        Intent(context, BootCompleteService::class.java).apply {
-            action = BootCompleteService.ACTION_START
-            context.startService(this)
-        }
-    }
 
     private fun stopBootCompleteService(context: Context) {
         Intent(context, BootCompleteService::class.java).apply {

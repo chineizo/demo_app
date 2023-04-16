@@ -19,7 +19,7 @@ class LocationClientImpl(
     private val context: Context,
     private val client: FusedLocationProviderClient
 ) : LocationClient {
-    private val gps_fix_interval = 10000L
+
 
     @SuppressLint("MissingPermission")
     override fun getLocationUpdates(interval: Long): Flow<Location> {
@@ -39,7 +39,7 @@ class LocationClientImpl(
             }
 
             val locationRequest =
-                LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, gps_fix_interval)
+                LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval)
                     .apply {
                         setWaitForAccurateLocation(false)
                         setMinUpdateIntervalMillis(LocationRequest.Builder.IMPLICIT_MIN_UPDATE_INTERVAL)
