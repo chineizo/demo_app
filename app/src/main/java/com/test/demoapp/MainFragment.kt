@@ -1,7 +1,5 @@
 package com.test.demoapp
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
@@ -13,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 
 class MainFragment : Fragment() {
@@ -29,17 +26,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setSpannableToView(view)
-        view.findViewById<AppCompatButton>(R.id.cancelLocationUpdateButton).setOnClickListener {
-            stopBootCompleteService(requireContext())
-        }
-    }
-
-
-    private fun stopBootCompleteService(context: Context) {
-        Intent(context, BootCompleteService::class.java).apply {
-            action = BootCompleteService.ACTION_STOP
-            context.startService(this)
-        }
     }
 
     private fun setSpannableToView(view: View) {
