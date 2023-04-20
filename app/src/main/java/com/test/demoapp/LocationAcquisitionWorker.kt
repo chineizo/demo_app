@@ -21,13 +21,13 @@ class LocationAcquisitionWorker(private val context: Context, params: WorkerPara
     private lateinit var scope: CoroutineScope
     private lateinit var locationClient: LocationClient
     private lateinit var mainHandler: Handler
-
+    private lateinit var locationCacheManager: LocationCacheManager
     override fun doWork(): Result {
         Timber.i("LocationAcquisitionWorker--> doWork")
         job = SupervisorJob()
         scope = CoroutineScope(Dispatchers.IO + job)
         mainHandler = Handler(Looper.getMainLooper())
-
+        locationCacheManager = LocationCacheManager(context)
         locationClient = LocationClientImpl(
             applicationContext,
             LocationServices.getFusedLocationProviderClient(applicationContext)
@@ -56,7 +56,7 @@ class LocationAcquisitionWorker(private val context: Context, params: WorkerPara
                 }
 
                 //TODO Location can be persisted using Jetpack DataStore or Room Database
-
+                locationCacheManager.saveLocation(location)
                 job.cancelChildren()
             }
             .launchIn(scope)

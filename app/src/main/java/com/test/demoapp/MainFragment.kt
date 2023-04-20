@@ -12,8 +12,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
+    private val locationCacheManager: LocationCacheManager by lazy {
+        LocationCacheManager(
+            requireContext()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +36,11 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setSpannableToView(view)
+
+        locationCacheManager.getLocation().stateIn(lifecycleScope, SharingStarted.Lazily, initialValue = null)
+
+
+
     }
 
     private fun setSpannableToView(view: View) {
